@@ -1,22 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
+import UserBar from './Userbar';
+import ToDoList from './ToDoList';
+import CreateToDo from './CreateToDo';
+import { getTime } from './CreateToDo';
 
 function App() {
+  const initialTodos = [{title: "Homework", content: "Do CS Homework", dateCreated: getTime(), complete: false, dateCompleted: "" }]
+  const [user, setUser] = useState("")
+  const [todos, setTodos] = useState(initialTodos)
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+       <UserBar user={user} setUser={setUser} />
+       {user && <CreateToDo user={user} todos={todos} setTodos={setTodos} />}
+       {user && <ToDoList todos={todos} />}
       </header>
     </div>
   );
