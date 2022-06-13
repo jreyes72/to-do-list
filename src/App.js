@@ -26,21 +26,24 @@ function App() {
           title: action.title,
           content: action.content,
           dateCreated: action.dateCreated,
+          complete: action.complete,
+          dateCompleted: action.dateCompleted,
+          id: action.id
         };
         return [newTodo, ...state];
       case "DELETE_TODO":
-        return state.filter(todo => todo.id != action.id)
+        return action.deleted;
       case "TOGGLE_TODO":
         // toggle function
-        return {...state, }
+        return action.newTodo;
       default:
         return state;
     }
   }
-  const initialTodos = [{title: "Homework", content: "Do CS Homework", dateCreated: getTime(), complete: false, dateCompleted: "" }]
+  const initialTodos = [{title: "Homework", content: "Do CS Homework", dateCreated: getTime(), complete: false, dateCompleted: ""}]
   const [user, dispatchUser] = useReducer(userReducer, "")
   //const [user, setUser] = useState("")
-  const [todos, dispatchTodos] = useReducer(todoReducer, initialTodos);
+  const [todos, dispatchTodos] = useReducer(todoReducer, []);
   return (
     <div className="App">
       <header className="App-header">

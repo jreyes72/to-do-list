@@ -5,7 +5,7 @@ export default function CreateToDo({ user, todos, dispatchTodos }) {
     function handleTitle (evt) {setTitle(evt.target.value)}
     function handleContent (evt) {setContent(evt.target.value)}
     function handleCreate (evt) {
-        dispatchTodos({type: 'CREATE_TODO', title, content, dateCreated: getTime()})
+        dispatchTodos({type: 'CREATE_TODO', title, content, dateCreated: getTime(), complete: false, dateCompleted: null, id: Math.floor(Math.random() * 100)})
     } 
 return (
 <form onSubmit={(e) => {e.preventDefault(); handleCreate(e)} }>
