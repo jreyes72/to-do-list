@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-export default function CreateToDo({ user, todos, setTodos }) {
+export default function CreateToDo({ user, todos, dispatchTodos }) {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     function handleTitle (evt) {setTitle(evt.target.value)}
     function handleContent (evt) {setContent(evt.target.value)}
     function handleCreate (evt) {
-        const newTodo = {title, content, dateCreated: getTime(), complete: false, dateCompleted: "" }
-        setTodos([newTodo, ...todos])
+        dispatchTodos({type: 'CREATE_TODO', title, content, dateCreated: getTime()})
     } 
 return (
 <form onSubmit={(e) => {e.preventDefault(); handleCreate(e)} }>

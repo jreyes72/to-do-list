@@ -1,22 +1,27 @@
 import React, {useState} from "react";
 import { getTime } from "./CreateToDo";
 
-export default function ToDo({ title, content, dateCreated, complete}) {
-    const [checked, setChecked] = useState(false)
-    const handleChange = () => {
-        setChecked(!checked)
+export default function ToDo({ title, content, dateCreated, complete, todoDelete, todoToggle, index}) {
+    
+    const handleChange = (event) => {
+        todoToggle(index)
+    }
+    const handleDelete = (evt) => {
+        todoDelete(index)
     }
 return (
 <div>
 <h3>{title}</h3>
 <div>{content}</div>
 <form>
-<input type="checkbox" onChange={handleChange} id="check" value="done"></input>
-    <label for="check">Done: {checked ? `${!complete}`:  `${complete}`} </label>
+<input type="checkbox" onChange={handleChange} value={complete}></input>
 </form>
-<div>Completed: {checked ? getTime() : "" }</div>
+<div>Completed: {getTime()}</div>
 <br />
 <div>Created: {dateCreated}</div>
+<form onSubmit={(e) => {e.preventDefault(); handleDelete(e)} }>
+<input type="submit" value="Delete" />
+</form>
 </div>
 );
 }
